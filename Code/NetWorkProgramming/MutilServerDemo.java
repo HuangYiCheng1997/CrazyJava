@@ -49,7 +49,7 @@ class UserThread implements Runnable {
             System.out.println(msg);
             reader.close();
 
-            writer.println(msg);
+            writer.println(msg+"\n");
             writer.flush();
             writer.close();
 
