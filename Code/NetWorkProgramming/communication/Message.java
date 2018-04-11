@@ -46,7 +46,6 @@ public class Message implements Serializable {
         return info;
     }
 
-
     public void setInfo(String info) {
         this.info = info;
     }
