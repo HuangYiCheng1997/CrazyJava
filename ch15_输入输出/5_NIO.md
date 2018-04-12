@@ -97,6 +97,8 @@ Buffer rewind(); //将position设置为0,清除mark
 Buffer clear(); //清楚Buffer的内容.
 ```
 
+### 
+
 ## channel
 
 ```java
@@ -129,4 +131,110 @@ public class ChannelDemo {
 
 }
 ```
+
+### 
+
+## 字符集和Charset
+
+Java.nio.charset.Charset
+
+```java
+//获取Java支持的全部字符集
+SortedMap<String,Charset> map = Charset.availableCharsets();
+for (String alias:map.keySet())
+{
+    System.out.println(alias+":"+map.get(alias));
+}
+// 创建字符集对象
+Charset cs =  Charset.forName("GBK");
+// 创建编码对象
+CharsetEncoder csEncoder = cn.newEncoder();
+// 创建解码对象
+CharsetDecoder csDecoder = cn.newDecoder();
+// 创建字符缓冲区
+CharBuffer cbuff = CharBuffer.allocate(8);
+cbuff.put("黄");
+cbuff.put("大");
+cbuff.put("仁");
+cbuff.flip();
+
+ByteBuffer bbuff = csEncoder.encode(cbuff);
+// ByteBuffer bbuff = cs.encode(cbuff);
+for(int i=0; i<bbuff.capacity();i++)
+{
+	System.out.print(bbuff.get(i)+" ");
+}
+System.out.println("\n"+ csDecoder.decode(bbuff));
+
+```
+
+### 
+
+## 文件锁
+
+在NIO中,Java提供了FileLock来支持文件锁定功能,在FileChannel中提供的lock() / tryLock()方法可以获得文件锁FileLock对象.
+
+```java
+lock(Long postion,long size,boolean shared)
+// 对文件从postion开始,长度为size的内容加锁,该方法是阻塞式的
+tryLock(long position,long size ,boolean shared)
+// 同上,该方法是非阻塞式的
+shared 表示该锁是否共享.默认为false;
+```
+
+```java
+package NIO;
+
+import java.nio.*;
+import java.nio.channels.FileChannel;
+import java.nio.channels.FileLock;
+import java.io.*;
+
+public class FileLockDemo {
+
+	public static void main(String[] args) throws Exception{
+		// TODO Auto-generated method stub
+			try 
+			(
+				FileChannel fcOut = new FileOutputStream("C:\\Users\\Administrator\\Desktop\\test.doc").getChannel();
+			)
+			{
+				FileLock lock = fcOut.tryLock();
+				Thread.sleep(1000);
+				lock.release();
+			}
+	}
+
+}
+```
+
+### 文件锁的注意点
+
+① 在某些平台上,一个程序不能获得文件锁,它也能对该文件进行读写.
+
+② 在某些平台上,不能同步地锁定一个文件并把他映射到内存中.
+
+③ 文件锁是由Java虚拟机所持有的,如果两个Java程序使用同一个Java虚拟机运行,则他们不能对同一个文件进行加锁.
+
+④ 在某些平台上,关闭FileChannel时,会释放Java虚拟机在该文件上的所有锁,因此应该皮面对同一个被锁定的文件打开多个FileChannel.
+
+## Java7的NIO
+
+Java7对NIO进行了重大改进
+
+① 提供了全面的文件IO和文件系统访问支持.
+
+② 基于异步Channel的IO
+
+### Path
+
+早起Java只提供了一个File类来访问文件系统,为了弥补不足,Java7中引入了一个Path接口.
+
+Path接口代表一个平台无关的平台路径.
+
+同时还加入Files 和 Paths两个工具类.
+
+具体请看API并且总结出来
+
+
 

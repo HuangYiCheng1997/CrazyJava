@@ -74,3 +74,66 @@ public class TestFile {
 }
 ```
 
+# Path
+
+```java
+public interface Path extends Comparable<Path>, Iterable<Path>, Watchable
+```
+
+An object that may be used to locate a file in a file system. It will typically represent a system dependent file path.
+
+### Creating a Path Instance
+
+```java
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
+public class PathExample {
+
+    public static void main(String[] args) {
+
+        Path path = Paths.get("c:\\data\\myfile.txt");
+
+    }
+}
+```
+
+### Creating a Relative Path
+
+```java
+// You create a relative path using the Paths.get(basePath, relativePath) method.
+Path file = Paths.get("d:\\data", "projects\\a-project\\myfile.txt");
+// 注意那个 点
+Path currentDir = Paths.get("d:\\data\\projects\.\a-project");
+d:\data\projects\a-project
+// -----------------------------
+String path = "d:\\data\\projects\\a-project\\..\\another-project";
+Path parentDir2 = Paths.get(path);
+d:\data\projects\another-project
+```
+
+### Path.normalize()
+
+normalize的意思是除去路径中间的点
+
+```java
+String originalPath = "d:\\data\\projects\\a-project\\..\\another-project";
+Path path1 = Paths.get(originalPath);
+System.out.println("path1 = " + path1);
+Path path2 = path1.normalize();
+System.out.println("path2 = " + path2);
+```
+
+
+
+# Files
+
+Files类提供一些操作file的方法.
+
+```java
+Files.exists();
+Files.createDirectory();
+Files.copy();
+Files.move();
+```
+
