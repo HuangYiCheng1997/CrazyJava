@@ -1,6 +1,6 @@
 # Tomcat
 
-Tomcat一个开源而且免费的JSP服务器.
+Tomcat是一个执行Java Servlet然后渲染包含JSP代码网页的应用服务器。
 
 ## Tomcat安装与运行
 
@@ -10,9 +10,19 @@ Tomcat一个开源而且免费的JSP服务器.
 
 ### 配置:
 
-在环境变量中添加JAVA_HOME
+1. 在环境变量中添加JAVA_HOME
 
 ![](https://github.com/HuangYiCheng1997/create-picture-url/blob/master/java/Tomcat%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F.png?raw=true)
+
+2. 在环境变量中添加CATALINA_HTOM
+
+![](https://github.com/HuangYiCheng1997/create-picture-url/blob/master/java/catalina_home.png?raw=true)
+
+3.添加环境变量
+
+![](https://github.com/HuangYiCheng1997/create-picture-url/blob/master/java/tomcat%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F2.png?raw=true)
+
+
 
 ### 运行:
 
@@ -46,26 +56,29 @@ Tomcat一个开源而且免费的JSP服务器.
 1. 组成web应用的资源有哪些?
     1. html css js image
 
-   2. JSP Java 支持的jar
+       2. JSP Java 支持的jar
 
-   3. 配置文件
+       3. 配置文件
 
-      ​
+    
 
 2. 什么是网站的根目录?
 
    1. 包裹全部web应用资源的目录
-   2. ​
+
+      
 
 3. 虚拟目录的映射
 
    http://127.0.0.1:8080/ 对应的就是tomcat/webapps这个目录
 
-   ​
+   
 
 4. 虚拟目录的配置
 
    因为我们不可能所有东西都放到webapss这个目录里面,所以我们需要修改虚拟目录的映射
+
+   
 
    配置方式1:
 
